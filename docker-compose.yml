@@ -1,0 +1,18 @@
+services:
+  frontend:
+    image: fontend
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      args:
+        PORT: ${APP_FRONTEND_PORT}
+    working_dir: /app
+    volumes:
+      - ./apps/web/pages:/app/apps/web/pages
+    networks: 
+      - internal
+    ports: 
+      - ${APP_FRONTEND_PORT}:${APP_FRONTEND_PORT}
+
+networks:
+  internal: {}
