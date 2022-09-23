@@ -8,11 +8,26 @@ services:
         PORT: ${APP_FRONTEND_PORT}
     working_dir: /app
     volumes:
-      - ./apps/web/pages:/app/apps/web/pages
+      - ./apps/web/pages:/app/apps/web/pages:ro
     networks: 
       - internal
     ports: 
       - ${APP_FRONTEND_PORT}:${APP_FRONTEND_PORT}
+
+  backend:
+    image: backend
+    build:
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
+      args:
+        PORT: ${APP_BACKEND_PORT}
+    working_dir: /app
+    volumes:
+      - ./apps/backend/src:/app/apps/backend/src:ro
+    networks:
+      - internal
+    ports:
+      - ${APP_BACKEND_PORT}:${APP_BACKEND_PORT}
 
 networks:
   internal: {}

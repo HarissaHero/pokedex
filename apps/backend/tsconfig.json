@@ -1,0 +1,11 @@
+{
+  "extends": "@pokedex/tsconfig/nextjs.json",
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "target": "ES2022",
+    "module": "CommonJS"
+  }
+}

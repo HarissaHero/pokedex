@@ -1,0 +1,8 @@
+{
+    "ignore": [".git", "node_modules", "dist"],
+    "watch": ["./src"], 
+    "exec": "pnpm start",
+    "execMap": {
+        "ts": "ts-node"
+    }
+  }
