@@ -19,6 +19,8 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "npm-run-all": "latest"
+  },
   "packageManager": "pnpm@7.11.0"
 }

@@ -22,5 +22,5 @@ CMD [                                          \
    "run",                                      \
       "--workspace-root",                      \
       "--filter", "@pokedex/backend", \
-   "start:nodemon"                                     \
+   "start:dev"                                     \
 ]
