@@ -1,4 +1,18 @@
 services:
+  database:
+    image: mongo
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PSWD=${DB_PSWD}
+      - DB_NAME=${DB_NAME}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    volumes:
+      - ./config/mongo:/docker-entrypoint-initdb.d
+    networks:
+      - internal
+    ports: 
+      - ${DB_PORT}:${DB_PORT}
+
   frontend:
     image: fontend
     build:
