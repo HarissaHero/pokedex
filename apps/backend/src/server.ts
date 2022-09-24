@@ -1,11 +1,15 @@
 import express from "express";
 
+import { default as ensure } from "@utils/env";
+import { default as logger } from "./middleware/logger";
+
 const app = express();
 
-app.get("/health", (_request, response) => {
+app.all("*", logger());
+app.get("/health", (request, response) => {
   response.send("OK");
 });
 
-app.listen(5000, () => {
+app.listen(ensure("PORT"), () => {
   console.log("server running...");
 });
