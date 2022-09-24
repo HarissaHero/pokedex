@@ -1,8 +1,8 @@
-import express, { response } from "express";
+import express from "express";
 
 const app = express();
 
-app.get("/health", (request, response) => {
+app.get("/health", (_request, response) => {
   response.send("OK");
 });
 
