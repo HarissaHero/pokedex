@@ -34,6 +34,11 @@ services:
       context: .
       dockerfile: ./apps/backend/Dockerfile
       args:
+        DB_HOST: ${DB_HOST}
+        DB_PORT: ${DB_PORT}
+        DB_USER: ${DB_USER}
+        DB_PSWD: ${DB_PSWD}
+        DB_NAME: ${DB_NAME}
         PORT: ${APP_BACKEND_PORT}
     working_dir: /app
     volumes:

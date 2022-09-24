@@ -3,7 +3,8 @@ set -e
 echo "Setting up the database..."
 
 mongosh << EOF
-  use $MONGO_INITDB_DATABASE
+  // Create DB
+  db = new Mongo().getDB("$DB_NAME");
 
   // Create Role
   pokemonTrainerRole = db.createRole({
@@ -15,23 +16,21 @@ mongosh << EOF
   })
 
   // Create user
-  dbAdmin = db.getSiblingDB("$MONGO_INITDB_DATABASE");
-  dbAdmin.createUser({
+  db.createUser({
     user: "$DB_USER",
     pwd: "$DB_PSWD",
-    roles: [{ role: "pokemonTrainer", db: "$MONGO_INITDB_DATABASE"}],
+    roles: [{ role: "pokemonTrainer", db: "$DB_NAME"}],
     mechanisms: ["SCRAM-SHA-1"],
   });
 
   // Authenticate user
-  dbAdmin.auth({
+  db.auth({
     user: "$DB_USER",
     pwd: "$DB_PSWD",
     mechanisms: ["SCRAM-SHA-1"]
   });
 
-  // Create DB and collection
-  db = new Mongo().getDB("$DB_NAME");
+  // Create collection of pokemon
   db.createCollection("pokemon", { capped: false });
 EOF
 
