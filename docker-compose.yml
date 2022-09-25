@@ -10,7 +10,7 @@ services:
       - ./config/mongo:/docker-entrypoint-initdb.d
     networks:
       - internal
-    ports: 
+    ports:
       - ${DB_PORT}:${DB_PORT}
 
   frontend:
@@ -19,13 +19,15 @@ services:
       context: .
       dockerfile: ./apps/web/Dockerfile
       args:
+        APP_BACKEND_INNER_HOST: ${APP_BACKEND_INNER_HOST}
+        APP_BACKEND_PORT: ${APP_BACKEND_PORT}
         PORT: ${APP_FRONTEND_PORT}
     working_dir: /app
     volumes:
-      - ./apps/web/pages:/app/apps/web/pages:ro
-    networks: 
+      - ./apps/web/src:/app/apps/web/src:ro
+    networks:
       - internal
-    ports: 
+    ports:
       - ${APP_FRONTEND_PORT}:${APP_FRONTEND_PORT}
 
   backend:
@@ -50,4 +52,3 @@ services:
 
 networks:
   internal: {}
-  
