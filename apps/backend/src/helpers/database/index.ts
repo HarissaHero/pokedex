@@ -1,6 +1,6 @@
 import mongoose, { Connection } from "mongoose";
 
-import ensure from "@utils/env";
+import ensure from "@helpers/env";
 
 const DB_NAME = ensure("DB_NAME");
 const DB_USER = ensure("DB_USER");
@@ -10,10 +10,10 @@ const DB_PORT = ensure("DB_PORT");
 
 let connection: Connection;
 
-const db = async (): Promise<Connection> => {
+const connect = (): Connection => {
   if (connection === undefined) {
     try {
-      connection = await mongoose.createConnection(
+      connection = mongoose.createConnection(
         `mongodb://${DB_USER}:${DB_PSWD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
       );
     } catch (error) {
@@ -24,5 +24,7 @@ const db = async (): Promise<Connection> => {
 
   return connection;
 };
+
+const db = connect()
 
 export default db;

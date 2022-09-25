@@ -1,0 +1,1 @@
+export * as PokemonController from './pokemon'
