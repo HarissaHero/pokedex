@@ -11,7 +11,7 @@ export default function Web(props: HealthCheckProps) {
 }
 
 export const getServerSideProps = async () => {
-  const response = await fetch(`${BACKEND_URL}/health`);
+  const response = await fetch(`${BACKEND_URL}/api/health`);
   const status = await response.json();
 
   return {
